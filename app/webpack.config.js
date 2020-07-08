@@ -12,14 +12,17 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
+        loader: 'url-loader',
         options: {
-          url: true,
+          limit: 8192,
         },
       },
     ],
-  },
-  plugins: [
+  },  plugins: [
     new CopyWebpackPlugin([{ from: "./src/index.html", to: "index.html" }]),
   ],
   devServer: { contentBase: path.join(__dirname, "dist"), compress: true },
